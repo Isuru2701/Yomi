@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import AdminLogin from './components/admin/AdminLogin';
+
+import Login from './components/Login';
+import Register from './components/Register';
+import Catalog from './components/Catalog';
+import Collection from './components/Collection';
+import Manga from './components/Manga';
+import AddManga from './components/admin/AddManga';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +22,12 @@ root.render(
       <Route path="/" element={<App/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/register" element={<Register/>}></Route>
-      <Route
+      <Route path="/catalog" element={<Catalog/>}></Route>
+      <Route path="/collection" element={<Collection/>}></Route>
+      <Route path="/catalog/:id" element={<Manga/>}></Route>
+      <Route path="/admin" element={<AdminLogin/>}></Route>
+      <Route path="/admin/add" element={<AddManga/>}></Route>
+    
     </Routes>
     </BrowserRouter>
   </React.StrictMode>
