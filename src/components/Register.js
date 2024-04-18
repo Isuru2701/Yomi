@@ -6,7 +6,7 @@ export default function Register() {
             <img src="/register_cover.jpg" className="object-cover h-full w-full" alt="image background" />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black"></div>
 
-            <div className="absolute inset-y-0 right-0 w-2/5 bg-background bg-opacity-100 flex flex-col items-center justify-center  rounded-l-lg mt-4 mb-4 mr-8">
+            <div className="absolute inset-y-0 right-0 w-1/3 bg-background bg-opacity-100 flex flex-col items-center justify-center  rounded-l-lg mt-4 mb-4 mr-8">
                 <h1 className="text-7xl text-midnight">Register</h1>
 
                 <br />
@@ -44,7 +44,7 @@ export default function Register() {
             
             </div>
             <div className="absolute bottom-0 left-0 p-4 text-gray-100 text-sm">
-                    © Artwork by <a href="https://www.pixiv.net/en/users/3205297">HAGURUMA-C</a>
+                    © Artwork by <a href="https://www.pixiv.net/en/artworks/113600258">void_0</a>
                 </div>
 
 
