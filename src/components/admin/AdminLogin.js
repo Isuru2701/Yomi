@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Joi from "joi";
+import Cookies from "js-cookie";
 
 export default function AdminLogin() {
 
@@ -27,7 +28,7 @@ export default function AdminLogin() {
 
     const fetchLogin = async () => {
         if (validate()) {
-            // Proceed with registration logic
+            
             try {
                 const response = await fetch('http://localhost:5000/api/auth', {
                     method: 'POST',
@@ -47,6 +48,7 @@ export default function AdminLogin() {
                     return;
                 }
                 else {
+                    Cookies.set("username", "admin");
                     window.location.href = '/';
                 }
             } catch (error) {
