@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 
 function Navigator() {
   return (
-    <Navbar expand="lg" className="bg-background  w-full flex-row">
+    <Navbar expand="lg" className="bg-background  w-full flex-row fixed top-0">
       <Container >
         <Navbar.Brand href="/"><h1>Yomi</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
