@@ -9,14 +9,14 @@ export default function Catalog() {
             <Navigator />
             <div className="w-full bg-background flex justify-center"><SearchBox /></div>
 
-            <div className="w-full h-screen flex flex-wrap bg-background">
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
-                <Card title="Title" author="Author" image="https://via.placeholder.com/150" />
+            <div className="w-full p-10 h-screen flex flex-wrap bg-background">
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
+                <Card title="Title" author="Author" image="https://via.placeholder.com/150" link='https://google.com'/>
             </div>
 
         </div>
