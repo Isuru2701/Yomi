@@ -88,7 +88,7 @@ export default function Catalog() {
                         onBlur={handleBlur}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <Button className="px-3 py-2 ml-2 bg-secondary border-none active:bg-primary" onClick={(e) => { e.preventDefault(); search() }}><img src='/search_icon.svg' className="w-7" /></Button>
+                    <Button className="px-3 py-2 ml-2 bg-secondary border-none active:bg-primary" onClick={() => { search() }}><img src='/search_icon.svg' className="w-7" /></Button>
 
                 </div>
                 </div>
