@@ -44,7 +44,7 @@ export default function Manga() {
                 <div className="flex items-start space-x-6">
                     {/* Book Image */}
                     <div className="flex-shrink-0">
-                        <img src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" className="w-40 h-auto rounded-md" />
+                        <img src={mangaData.image} className="w-40 h-auto rounded-md" />
                     </div>
 
                     {/* Book Details */}
@@ -64,7 +64,7 @@ export default function Manga() {
                         {/* Description */}
                         <div className="mt-4 text-white">
                             <h2 className="text-lg font-semibold text-highlight">Synopsis</h2>
-                            <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit.
+                            <p className="mt-2">{mangaData.description}
 
                             </p>
                         </div>

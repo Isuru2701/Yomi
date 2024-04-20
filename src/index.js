@@ -26,7 +26,8 @@ root.render(
       <Route path="/collection" element={<Collection/>}></Route>
       <Route path="/catalog/:id" element={<Manga/>}></Route>
       <Route path="/admin" element={<AdminLogin/>}></Route>
-      <Route path="/admin/add" element={<AddManga/>}></Route>
+      <Route path="/admin/add/" element={<AddManga/>}></Route>
+      <Route path="/admin/add/:id" element={<AddManga/>}></Route>
     
     </Routes>
     </BrowserRouter>

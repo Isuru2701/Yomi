@@ -28,7 +28,7 @@ export default function Catalog() {
 
     const fetchManga = async () => {
         try {
-            const response = await fetch('http://localhost:5000/manga/all', {
+            const response = await fetch('http://localhost:5000/manga/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ export default function Catalog() {
                         key={manga._id}
                         title={manga.title}
                         author={manga.author}
-                        image="https://via.placeholder.com/150"
+                        image={manga.image}
                         id={manga._id} 
                     />
                 ))}

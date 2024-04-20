@@ -1,65 +1,181 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Joi from "joi";
 
 export default function AddManga() {
-    /* repurpose this as edit manga info by filling in the fields when editing */
+    const { id } = useParams();
+    const [mangaData, setMangaData] = useState({});
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [demographic, setDemographic] = useState('');
+    const [genres, setGenres] = useState('');
+    const [synopsis, setSynopsis] = useState('');
+    const [image, setImage] = useState('');
+    const [error, setError] = useState('');
+
+    // Define Joi schema for validation
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        author: Joi.string().required(),
+        demographic: Joi.string().required(),
+        genres: Joi.string().required(),
+        synopsis: Joi.string().required(),
+        image: Joi.string().uri().required() // Validate as a valid URI
+    });
+
+    const fetchMangaInfo = async () => {
+        console.log(id);
+        try {
+            const response = await fetch(`http://localhost:5000/manga/id/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                console.error('Failed to fetch manga');
+                return;
+            }
+            const data = await response.json();
+            setMangaData(data);
+
+            // Now update the state based on mangaData
+            setTitle(data.title || ''); // Use default value '' if data.title is undefined
+            setAuthor(data.author || '');
+            setDemographic(data.demographic || '');
+            setGenres(data.genre || '');
+            setSynopsis(data.description || '');
+            setImage(data.image || '');
+
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    };
+
+    const validate = () => {
+
+        console.log(title, author, demographic, genres, synopsis, image);
+
+        const mangaInfo = { title, author, demographic, genres, synopsis, image };
+        const { error: validationError } = schema.validate(mangaInfo);
+        if (validationError) {
+            setError(validationError.details[0].message);
+            return false;
+        }
+        setError('');
+        return true;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (validate()) {
+            try {
+                const url = id ? `http://localhost:5000/manga/${id}` : 'http://localhost:5000/manga';
+                const method = id ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(
+                        {
+                            "title": title,
+                            "author": author,
+                            "demographic": demographic,
+                            "genre": genres,
+                            "description": synopsis,
+                            "image": image
+                        }
+                    )
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    setError(errorData.message);
+                } else {
+                    console.log('Manga updated successfully');
+                    window.location.href = '/';
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                setError('An error occurred while processing your request.');
+            }
+        }
+
+
+    };
+
+    useEffect(() => {
+        if (id) {
+            fetchMangaInfo();
+        }
+    }, [id]);
+
     return (
         <div className="flex flex-col w-full h-full justify-center items-center bg-background pt-10">
-            
-            
             <h1 className="text-6xl text-warm">Manga Info</h1>
             <br />
-
-            <form className="flex flex-col space-y-5 w-2/3 ">
-
+            <form className="flex flex-col space-y-5 w-2/3" onSubmit={handleSubmit}>
                 <input
                     type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
                     placeholder="Title"
-                    required={true}
-
+                    required
                 />
                 <input
                     type="text"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
                     className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
                     placeholder="Author"
-                    required={true}
-
+                    required
                 />
-                {/*TODO: query the db for demographic and genres, and suggest it as a dropdown */}
                 <input
                     type="text"
+                    value={demographic}
+                    onChange={(e) => setDemographic(e.target.value)}
                     className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
                     placeholder="Demographic"
-                    required={true}
+                    required
                 />
                 <input
                     type="text"
+                    value={genres}
+                    onChange={(e) => setGenres(e.target.value)}
                     className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
                     placeholder="Genres"
-                    required={true}
-
+                    required
                 />
-
                 <textarea
-                    type="text"
+                    value={synopsis}
+                    onChange={(e) => setSynopsis(e.target.value)}
                     className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
-                    placeholder="Synposis"
-                    required={true}
-
+                    placeholder="Synopsis"
+                    required
                 />
-
+                <input
+                    type="url" // Use type "url" for image link
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
+                    className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-warm"
+                    placeholder="Image Link"
+                    required
+                />
+                {error && <p className="text-red-500">{error}</p>}
                 <input
                     type="submit"
                     className="px-4 py-5 bg-warm text-white rounded-md mt-4 cursor-pointer"
                     value="Submit"
+                    onClick={handleSubmit}
                 />
 
             </form>
-            <br />
-            <br />
-            <br />
 
         </div>
     );
 }
-
