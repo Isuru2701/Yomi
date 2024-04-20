@@ -1,9 +1,9 @@
 import React from "react";
-
+import Navigator from "./Navigator";
 export default function Collection() {
     return (
         <div>
-        <h1>Collection</h1>
+        <Navigator/>
         </div>
     );
 }
