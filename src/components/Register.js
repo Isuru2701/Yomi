@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Register() {
     return (
-        <div className="flex w-full h-screen">
-            <img src="/register_cover.jpg" className="object-cover h-full w-full" alt="image background" />
+        <div className="flex w-full h-full">
+            <img src="/register_cover.jpg" className="object-cover h-full w-full fixed top-0" alt="image background" />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black"></div>
 
             <div className="absolute inset-y-0 right-0 w-1/3 bg-background bg-opacity-100 flex flex-col items-center justify-center  rounded-l-lg mt-4 mb-4 mr-8">
