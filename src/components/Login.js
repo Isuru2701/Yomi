@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Joi from "joi";
-
+import Cookies from "js-cookie";
 export default function Login() {
 
     const [email, setEmail] = useState("");    
@@ -47,6 +47,9 @@ export default function Login() {
                     return;
                 }
                 else {
+                    const data = await response.json();
+                    
+                    Cookies.set("username", data.username);
                     window.location.href = '/';
                 }
             } catch (error) {
