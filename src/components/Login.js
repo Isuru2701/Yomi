@@ -34,6 +34,8 @@ export default function Login() {
                         value="Login"
                     />
                 </form>
+                <a href='/register' className="text-highlight text-s underline pt-2">I dont have an account</a>
+                <a href='/' className="text-highlight text-xs underline pt-2">return home</a>
             
             </div>
             <div className="absolute bottom-0 left-0 p-4 text-gray-100 text-sm">

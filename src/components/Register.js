@@ -41,6 +41,7 @@ export default function Register() {
                         value="Register"
                     />
                 </form>
+                <a href='/' className="text-midnight-dark text-xs underline pt-2">return home</a>
             
             </div>
             <div className="absolute bottom-0 left-0 p-4 text-gray-100 text-sm">
