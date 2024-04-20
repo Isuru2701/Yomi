@@ -12,6 +12,13 @@ export default function Register() {
                 <br />
                 <br />
                 <form className="flex flex-col space-y-5 w-2/3 ">
+                <input
+                        type="text"
+                        className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-midnight-dark"
+                        placeholder="Username"
+                        required={true}
+
+                    />
                     <input
                         type="text"
                         className="px-10 py-6 border border-gray-600 bg-background rounded-md text-gray-100 focus:outline-none focus:border-midnight-dark"
@@ -19,7 +26,6 @@ export default function Register() {
                         required={true}
 
                     />
-                    <br/>
 
                     <input
                         type="password"
@@ -41,7 +47,9 @@ export default function Register() {
                         value="Register"
                     />
                 </form>
+                <a href='/login' className="text-midnight-dark text-s underline pt-2">login instead</a>
                 <a href='/' className="text-midnight-dark text-xs underline pt-2">return home</a>
+                
             
             </div>
             <div className="absolute bottom-0 left-0 p-4 text-gray-100 text-sm">
