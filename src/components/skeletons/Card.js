@@ -7,7 +7,7 @@ export default function Card(props) {
             <div className="p-4">
                 <h2 className="font-bold text-midnight">{props.title}</h2>
                 <p className="text-sm text-white">{props.author}</p>
-                <a className='text-sm text-highlight' href={props.link}>more info</a>
+                <a className='text-sm text-highlight' href={"/catalog/"+props.id}>more info</a>
 
                 {/*TODO: props.admin true? or admin true from cookies? render add and delete buttons */}
             </div>

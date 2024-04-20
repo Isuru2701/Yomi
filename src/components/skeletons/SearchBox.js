@@ -14,6 +14,8 @@ export default function SearchBox() {
         setIsActive(false);
     };
 
+    
+
     return (
         <div className="w-full flex justify-center flex-row">
             <Form.Control
@@ -26,7 +28,7 @@ export default function SearchBox() {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
             />
-            <Button className="px-3 py-2 ml-2 bg-secondary border-none active:bg-primary"><img src='/search_icon.svg' className="w-7"/></Button>
+            
         </div>
     );
 }
