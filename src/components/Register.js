@@ -15,7 +15,9 @@ export default function Register() {
             .messages({
                 'string.pattern.base': 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.'
             }),
-        passwordConfirm: Joi.any().valid(Joi.ref('password')).required().label('Confirm password')
+        passwordConfirm: Joi.any().valid(Joi.ref('password')).required().label('Confirm password').messages({
+            'string.pattern.base': 'Password does not match confirm password'
+        })
     });
 
     const validate = () => {
