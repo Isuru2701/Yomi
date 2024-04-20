@@ -23,6 +23,26 @@ export default function AddManga() {
         image: Joi.string().uri().required() // Validate as a valid URI
     });
 
+    const checkSession = async() => {
+        try {
+            const response = await fetch('http://localhost:5000/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                console.error('Failed to fetch manga');
+                return;
+            }
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
     const fetchMangaInfo = async () => {
         console.log(id);
         try {
@@ -68,6 +88,8 @@ export default function AddManga() {
     };
 
     const handleSubmit = async (e) => {
+
+        checkSession();
         e.preventDefault();
 
         if (validate()) {
@@ -76,9 +98,10 @@ export default function AddManga() {
                 const method = id ? 'PUT' : 'POST';
 
                 const response = await fetch(url, {
-                    method,
+                    method: method,
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'withCredentials': 'true'
                     },
                     body: JSON.stringify(
                         {
@@ -89,7 +112,8 @@ export default function AddManga() {
                             "description": synopsis,
                             "image": image
                         }
-                    )
+                    ),
+                    credentials: "include"
                 });
 
                 if (!response.ok) {

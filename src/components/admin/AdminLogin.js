@@ -26,19 +26,23 @@ export default function AdminLogin() {
         return true;
     };
 
+    
+
     const fetchLogin = async () => {
         if (validate()) {
             
             try {
-                const response = await fetch('http://localhost:5000/api/auth', {
+                const response = await fetch('http://localhost:5000/admin/login', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'withCredentials': 'true'
                     },
                     body: JSON.stringify({
                         "email": email,
                         "password": password
-                    })
+                    }),
+                    credentials: "include"
                 });
 
                 if (!response.ok) {

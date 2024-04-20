@@ -32,12 +32,14 @@ export default function Login() {
                 const response = await fetch('http://localhost:5000/api/auth', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'withCredentials': 'true'
                     },
                     body: JSON.stringify({
                         "email": email,
                         "password": password
-                    })
+                    }),
+                    credentials: 'include'
                 });
 
                 if (!response.ok) {

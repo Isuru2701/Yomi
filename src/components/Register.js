@@ -45,13 +45,15 @@ export default function Register() {
                 const response = await fetch('http://localhost:5000/api/user', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'withCredentials': 'true'
                     },
                     body: JSON.stringify({
                         "username": username,
                         "email": email,
                         "password": password
-                    })
+                    }),
+                    credentials: 'include'
                 });
 
                 if (!response.ok) {

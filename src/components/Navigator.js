@@ -7,7 +7,7 @@ function Navigator() {
   const logout = async () => {
 
     try {
-      const response = await fetch('http://localhost:5000/manga/', {
+      const response = await fetch('http://localhost:5000/users/logout', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
