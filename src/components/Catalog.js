@@ -99,7 +99,7 @@ export default function Catalog() {
                         title={manga.title}
                         author={manga.author}
                         image="https://via.placeholder.com/150"
-                        id={manga._id} // Use unique identifier for key prop
+                        id={manga._id} 
                     />
                 ))}
             </div>
