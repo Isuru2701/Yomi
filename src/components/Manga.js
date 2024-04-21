@@ -35,7 +35,7 @@ export default function Manga() {
     }
 
     const checkIfAdmin = async () => {
-        try{
+        try {
             const response = await fetch(`http://localhost:5000/admin/checkAdmin`, {
                 method: 'GET',
                 headers: {
@@ -55,7 +55,7 @@ export default function Manga() {
             setAdmin(true);
             console.log(data);
         }
-        catch(error) {
+        catch (error) {
             console.error('Fetch error:', error);
         }
     }
@@ -70,7 +70,7 @@ export default function Manga() {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'withCredentials': 'true'   
+                    'withCredentials': 'true'
                 }, credentials: 'include'
             });
 
@@ -85,7 +85,37 @@ export default function Manga() {
         } catch (error) {
             console.error('Fetch error:', error);
         }
-    
+
+    }
+
+    const handleAddtoCollections = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/collections', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'withCredentials': 'true'
+                },
+                body: JSON.stringify({
+                    "mangaId" : mangaData._id
+                }),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                console.error('Failed to add manga');
+                return;
+            }
+            else {
+                alert('Manga added to collection');
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+        }
+        catch (error) {
+
+        }
     }
 
     useEffect(() => {
@@ -131,8 +161,9 @@ export default function Manga() {
             </div>
             <div className="flex w-full justify-center mt-2 space-x-2">
 
-                <Button className='bg-background border-secondary'>Add to collection</Button>
+                <Button className='bg-background border-secondary' onClick={handleAddtoCollections}>Add to collection</Button>
                 <a href='/catalog'><Button className='bg-background border-none'>search for more</Button></a>
+
                 {admin &&
                     <div>
                         <a href={`/admin/add/${mangaData._id}`}><Button className='bg-background border-secondary mr-2'>Edit info</Button></a>
