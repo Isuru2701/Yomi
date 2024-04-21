@@ -72,6 +72,9 @@ export default function Catalog() {
         }
     }
 
+    
+
+
     return (
         <div className="">
             <header><Navigator /></header>
@@ -92,7 +95,7 @@ export default function Catalog() {
 
                 </div>
                 </div>
-            <div className="w-full p-10 h-screen flex flex-wrap bg-background">
+            <div className="w-full p-10 h-full flex flex-wrap bg-background">
                 {mangaData.map((manga) => (
                     <Card
                         key={manga._id}

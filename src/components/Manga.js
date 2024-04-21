@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Navigator from "./Navigator";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Manga() {
 
     //get book id from path variable
     const { id } = useParams();
     const [mangaData, setMangaData] = useState({});
+    const [admin, setAdmin] = useState(false);
     const fetchInfo = async () => {
         try {
             const response = await fetch(`http://localhost:5000/manga/id/${id}`, {
@@ -29,13 +31,68 @@ export default function Manga() {
             console.error('Fetch error:', error);
         }
 
-        
+
+    }
+
+    const checkIfAdmin = async () => {
+        try{
+            const response = await fetch(`http://localhost:5000/admin/checkAdmin`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'withCredentials': 'true'
+                },
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                console.error('Not admin');
+                setAdmin(false)
+                return;
+            }
+
+            const data = await response.json();
+            setAdmin(true);
+            console.log(data);
+        }
+        catch(error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    const handleDelete = async () => {
+        //get confirmation first
+        if (!window.confirm('Are you sure you want to delete this manga? This action cannot be undone')) {
+            return;
+        }
+        try {
+            const response = await fetch(`http://localhost:5000/manga/${mangaData._id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'withCredentials': 'true'   
+                }, credentials: 'include'
+            });
+
+            if (!response.ok) {
+                console.error('Failed to delete manga');
+                return;
+            }
+
+            const data = await response.json();
+            console.log(data);
+            window.location.href = '/catalog';
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    
     }
 
     useEffect(() => {
         fetchInfo();
+        checkIfAdmin();
     }
-    , []);
+        , []);
 
     return (
         <div>
@@ -55,9 +112,9 @@ export default function Manga() {
                         {/* Author, Genres, Demographics */}
                         <div className="flex items-start flex-col space-x-2 mt-2 text-white">
                             <p className="text-4xl text-gray-400">{mangaData.author}</p>
-                            <br/>
+                            <br />
                             <p><strong className="text-highlight">Genres</strong> {mangaData.genre}</p>
-                            <br/>
+                            <br />
                             <p><strong className="text-highlight">Demographics</strong> {mangaData.demographic}</p>
                         </div>
 
@@ -76,6 +133,12 @@ export default function Manga() {
 
                 <Button className='bg-background border-secondary'>Add to collection</Button>
                 <a href='/catalog'><Button className='bg-background border-none'>search for more</Button></a>
+                {admin &&
+                    <div>
+                        <a href={`/admin/add/${mangaData._id}`}><Button className='bg-background border-secondary mr-2'>Edit info</Button></a>
+                        <Button className='bg-background border-highlight' onClick={handleDelete}>Delete</Button>
+                    </div>
+                }
             </div>
         </div>
     );
